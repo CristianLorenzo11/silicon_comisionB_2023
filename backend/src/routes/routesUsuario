@@ -1,0 +1,17 @@
+const express = require('express');
+const mysqlConnect = require('../database/bd')
+const bodyParser = require('body-parser');
+const router = express()
+const jwt = require('jsonwebtoken')
+
+router.get('/usuarios', (req , res)=>{
+    mysqlConnect.query('SELECT * FROM usuarios', (error, registros)=>{
+        if(error){
+            console.log('Error en la base de datos', error)
+        }else{
+            res.json(registros)
+        }
+    })
+})
+
+module.exports= router;
